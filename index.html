@@ -2,57 +2,451 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Haptic-Enhanced Bioimpedance Needle for Precision Navigation in Central Venous Catheterisation with Millimetre Accuracy</title>
   <!-- 引入 model-viewer 组件 -->
   <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.0.0/model-viewer.min.js"></script>
   <style>
-    body { font-family: Arial, sans-serif; margin: 2em; background: #f8f9fa; }
-    .container { max-width: 800px; margin: auto; background: #fff; padding: 2em; border-radius: 8px; box-shadow: 0 2px 8px #0001; }
-    .title { font-size: 1.7em; font-weight: bold; color: #2c3e50; line-height: 1.2; margin-bottom: 0.5em; white-space: pre-line; }
-    .authors { font-size: 1.1em; margin-bottom: 0.2em; }
-    .affiliations { font-size: 0.98em; color: #444; margin-bottom: 1.5em; }
-    model-viewer { width: 100%; height: 400px; background: #eaeaea; border-radius: 8px; }
-    .desc { margin: 2em 0 2em 0; }
-    .contact { background: #f3f6fa; border-radius: 8px; padding: 1.5em; margin-top: 2em; font-size: 1.05em; }
-    .contact strong { display: inline-block; width: 90px; }
-    .contact a { color: #1976d2; text-decoration: none; }
-    .contact a:hover { text-decoration: underline; }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body { 
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      color: #333;
+    }
+    
+    .main-container {
+      max-width: 1600px;
+      margin: 0 auto;
+      padding: 1.5rem;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+    }
+    
+    .content-wrapper {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      width: 100%;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 80vh;
+    }
+    
+    .left-panel {
+      padding: 3rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    }
+    
+    .right-panel {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .title { 
+      font-size: 2.2rem; 
+      font-weight: 700; 
+      color: #2c3e50; 
+      line-height: 1.3; 
+      margin-bottom: 1rem;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    .authors { 
+      font-size: 1.2rem; 
+      margin-bottom: 0.5rem; 
+      font-weight: 500;
+      color: #495057;
+    }
+    
+    .affiliations { 
+      font-size: 1rem; 
+      color: #6c757d; 
+      margin-bottom: 2rem;
+      line-height: 1.6;
+    }
+    
+    .description {
+      font-size: 1.1rem;
+      line-height: 1.7;
+      color: #495057;
+      margin-bottom: 2.5rem;
+      text-align: justify;
+    }
+    
+    .features {
+      margin-bottom: 2.5rem;
+    }
+    
+    .features h3 {
+      font-size: 1.4rem;
+      color: #2c3e50;
+      margin-bottom: 1rem;
+      font-weight: 600;
+    }
+    
+    .feature-list {
+      display: grid;
+      gap: 0.8rem;
+    }
+    
+    .feature-item {
+      display: flex;
+      align-items: center;
+      font-size: 1rem;
+      color: #495057;
+    }
+    
+    .feature-icon {
+      width: 20px;
+      height: 20px;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      border-radius: 50%;
+      margin-right: 0.8rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 0.8rem;
+      font-weight: bold;
+    }
+    
+    .contact { 
+      background: linear-gradient(135deg, #e3f2fd 0%, #f3e5f5 100%);
+      border-radius: 15px; 
+      padding: 1.5rem; 
+      font-size: 0.95rem;
+      border-left: 4px solid #667eea;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-start;
+    }
+    
+    .contact h4 {
+      color: #2c3e50;
+      margin-bottom: 1rem;
+      font-size: 1.1rem;
+      width: 100%;
+    }
+    
+    .contact-info {
+      flex: 1;
+      min-width: 250px;
+    }
+    
+    .contact-person {
+      margin-bottom: 1.5rem;
+    }
+    
+    .contact-person:last-child {
+      margin-bottom: 0;
+    }
+    
+    .contact-qr {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-left: 1.5rem;
+    }
+    
+    .qr-code {
+      width: 150px;
+      height: auto;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    
+    .contact strong { 
+      display: block;
+      margin-bottom: 0.5rem;
+      color: #2c3e50;
+      font-size: 1rem;
+    }
+    
+    .contact a { 
+      color: #667eea; 
+      text-decoration: none; 
+      word-break: break-all;
+    }
+    
+    .contact a:hover { 
+      text-decoration: underline; 
+      color: #764ba2;
+    }
+    
+    model-viewer { 
+      width: 100%; 
+      height: 100%; 
+      min-height: 500px;
+      --poster-color: transparent;
+    }
+    
+    .model-info {
+      position: absolute;
+      top: 2rem;
+      left: 2rem;
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(10px);
+      padding: 1rem;
+      border-radius: 10px;
+      color: #2c3e50;
+      font-size: 0.9rem;
+      max-width: 200px;
+    }
+    
+    .model-controls {
+      position: absolute;
+      bottom: 2rem;
+      right: 2rem;
+      display: flex;
+      gap: 0.5rem;
+    }
+    
+    .control-btn {
+      background: rgba(255, 255, 255, 0.9);
+      border: none;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .control-btn:hover {
+      background: rgba(255, 255, 255, 1);
+      transform: scale(1.1);
+    }
+    
+    /* 响应式设计 */
+    @media (max-width: 768px) {
+      .main-container {
+        padding: 1rem;
+      }
+      
+      .content-wrapper {
+        grid-template-columns: 1fr;
+        min-height: auto;
+      }
+      
+      .left-panel {
+        padding: 2rem;
+        order: 2;
+      }
+      
+      .right-panel {
+        order: 1;
+        min-height: 50vh;
+      }
+      
+      .title {
+        font-size: 1.8rem;
+      }
+      
+      .model-info {
+        position: relative;
+        top: auto;
+        left: auto;
+        margin-bottom: 1rem;
+        max-width: none;
+      }
+      
+      .model-controls {
+        position: relative;
+        bottom: auto;
+        right: auto;
+        justify-content: center;
+        margin-top: 1rem;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .title {
+        font-size: 1.5rem;
+      }
+      
+      .authors {
+        font-size: 1rem;
+      }
+      
+      .description {
+        font-size: 1rem;
+      }
+    }
   </style>
 </head>
 <body>
-  <div class="container">
-    <div class="title">
-      Haptic-Enhanced Bioimpedance Needle for Precision Navigation in Central Venous Catheterisation with Millimetre Accuracy
-    </div>
-    <div class="authors">
-      Qingyu Zhang<sup>1</sup>, Ahmed Al-Hindawi<sup>2</sup>, Andreas Demosthenous<sup>1</sup>, Yu Wu<sup>1</sup>
-    </div>
-    <div class="affiliations">
-      <sup>1</sup>Department of Electronic and Electrical Engineering, UCL, Torrington Place, London WC1E 7JE, UK<br>
-      <sup>2</sup>Centre for Intensive Care Medicine, UCL, Gower Street, London WC1E 6BT, UK
-    </div>
-    <model-viewer
-      alt="BIOZ Needle 3D Model"
-      src="BiNH3.glb"
-      camera-controls
-      shadow-intensity="1"
-      touch-action="pan-y"
-      style="margin-bottom: 1.5em;"
-    ></model-viewer>
-    <div class="desc">
-      Central venous catheterisation (CVC) is a critical but challenging procedure, often complicated by needle misplacement. This project presents a bioimpedance (BIOZ) system with haptic feedback to assist clinicians in precise needle navigation. The system features a compact, wireless handle integrating BIOZ measurement and real-time tissue classification, enabling accurate and safe venous entry. In experimental trials, the system achieved a 100% success rate in venous access with high precision. This portable platform lays the foundation for future improvements in robotic-assisted CVC and similar procedures.
-    </div>
-    <div class="contact">
-      We warmly welcome you to continue following our research progress.<br><br>
-      <strong>Qingyu Zhang:</strong><br>
-      Email: <a href="mailto:qingyu.zhang.23@ucl.ac.uk">qingyu.zhang.23@ucl.ac.uk</a><br>
-      GitHub: <a href="https://github.com/alfredzhang98" target="_blank">https://github.com/alfredzhang98</a> (Part of this project would be open source)<br>
-      LinkedIn: <a href="https://www.linkedin.com/in/qingyuzhang98/?locale=en_US" target="_blank">https://www.linkedin.com/in/qingyuzhang98/?locale=en_US</a><br><br>
-      <strong>Supervisor:</strong><br>
-      Dr. Yu WU<br>
-      Email: <a href="mailto:yu.wu.09@ucl.ac.uk">yu.wu.09@ucl.ac.uk</a><br>
-      LinkedIn: <a href="https://www.linkedin.com/in/yu-w-9692856b/?locale=en_US" target="_blank">https://www.linkedin.com/in/yu-w-9692856b/?locale=en_US</a>
+  <div class="main-container">
+    <div class="content-wrapper">
+      <div class="left-panel">
+        <div class="title">
+          Haptic-Enhanced Bioimpedance Needle for Precision Navigation in Central Venous Catheterisation
+        </div>
+        
+        <div class="authors">
+          Qingyu Zhang<sup>1</sup>, Ahmed Al-Hindawi<sup>2</sup>, Andreas Demosthenous<sup>1</sup>, Yu Wu<sup>1</sup>
+        </div>
+        
+        <div class="affiliations">
+          <sup>1</sup>Department of Electronic and Electrical Engineering, UCL, Torrington Place, London WC1E 7JE, UK<br>
+          <sup>2</sup>Centre for Intensive Care Medicine, UCL, Gower Street, London WC1E 6BT, UK
+        </div>
+
+        <div class="description">
+          Central venous catheterisation (CVC) is a critical but challenging procedure, often complicated by needle misplacement. This project presents a bioimpedance (BIOZ) system with haptic feedback to assist clinicians in precise needle navigation.
+        </div>
+
+        <div class="features">
+          <h3>Key Features</h3>
+          <div class="feature-list">
+            <div class="feature-item">
+              <div class="feature-icon">✓</div>
+              <span>100% success rate in venous access (Z-axis)</span>
+            </div>
+            <div class="feature-item">
+              <div class="feature-icon">✓</div>
+              <span>Millimetre-level precision navigation</span>
+            </div>
+            <div class="feature-item">
+              <div class="feature-icon">✓</div>
+              <span>Real-time tissue classification</span>
+            </div>
+            <div class="feature-item">
+              <div class="feature-icon">✓</div>
+              <span>Compact wireless design</span>
+            </div>
+            <div class="feature-item">
+              <div class="feature-icon">✓</div>
+              <span>Haptic feedback integration</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="features">
+          <h3>Beyond Surgery – CVC, PIVC</h3>
+          <div class="feature-list">
+            <div class="feature-item">
+              <div class="feature-icon">✓</div>
+              <span>Portable Motion Detection</span>
+            </div>
+            <div class="feature-item">
+              <div class="feature-icon">✓</div>
+              <span>Electrochemical Sensing</span>
+            </div>
+            <div class="feature-item">
+              <div class="feature-icon">✓</div>
+              <span>Real-Time Impedance Measurement</span>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <span>
+            <h3>Welcome to Collaboration!</h3>
+          </span>
+        </div>
+
+        <!-- Add space -->
+        <div style="height: 2rem;"></div>
+        
+        <div class="contact">
+          <h4>Research Team Contact</h4>
+          
+          <div class="contact-info">
+            <div class="contact-person">
+              <strong>Qingyu Zhang</strong>
+              Email: <a href="mailto:qingyu.zhang.23@ucl.ac.uk">qingyu.zhang.23@ucl.ac.uk</a><br>
+              GitHub: <a href="https://github.com/alfredzhang98" target="_blank">github.com/alfredzhang98</a><br>
+              LinkedIn: <a href="https://www.linkedin.com/in/qingyuzhang98/?locale=en_US" target="_blank">LinkedIn Profile</a>
+            </div>
+            
+            <div class="contact-person">
+              <strong>Dr. Yu Wu (Supervisor)</strong>
+              Email: <a href="mailto:yu.wu.09@ucl.ac.uk">yu.wu.09@ucl.ac.uk</a><br>
+              LinkedIn: <a href="https://www.linkedin.com/in/yu-w-9692856b/?locale=en_US" target="_blank">LinkedIn Profile</a>
+            </div>
+          </div>
+          
+          <div class="contact-qr">
+            <img src="qr-code.png" alt="Contact QR Code" class="qr-code">
+          </div>
+        </div>
+      </div>
+      
+      <div class="right-panel">
+        <div class="model-info">
+          <strong>Interactive 3D Model</strong><br>
+          Left Drag to rotate<br>
+          Right Drag to move<br>
+          Scroll to zoom<br>
+        </div>
+        
+        <model-viewer
+          id="needleModel"
+          src="BiNH3.glb"
+          alt="BIOZ Needle System"
+          shadow-intensity="2"
+          camera-controls
+          min-camera-orbit="auto auto 150mm"
+          max-camera-orbit="auto auto 300mm"
+          interaction-prompt="none"
+          camera-target="0m 0.05m 0m"
+          field-of-view="45deg"
+          bounds="tight"
+          >
+        </model-viewer>
+        
+        <div class="model-controls">
+          <button class="control-btn" id="playBtn" title="Play/Pause Animation">▶</button>
+          <button class="control-btn" id="resetBtn" title="Reset View">⟲</button>
+        </div>
+      </div>
     </div>
   </div>
+
+  <script>
+    const model = document.querySelector("#needleModel");
+    const playBtn = document.querySelector("#playBtn");
+    const resetBtn = document.querySelector("#resetBtn");
+    
+    // 禁用播放按钮
+    playBtn.disabled = true;
+    playBtn.style.opacity = '0.5';
+    playBtn.style.cursor = 'not-allowed';
+    playBtn.title = '自动旋转功能已禁用';
+
+    // 重置视图按钮
+    resetBtn.addEventListener('click', () => {
+      model.cameraOrbit = '-60deg 75deg 20deg';
+      model.cameraTarget = '-0.18m 0.05m 0m';
+    });
+
+    // 模型加载完成后的初始设置
+    model.addEventListener('load', () => {
+      // 设置初始相机位置，确保模型居中显示
+      model.cameraOrbit = '-60deg 75deg 20deg';
+      model.cameraTarget = '-0.18m 0.05m 0m';
+    });
+  </script>
 </body>
-</html> 
+</html>
