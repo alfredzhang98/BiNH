@@ -201,23 +201,28 @@
     
     .model-info {
       position: absolute;
-      top: 2rem;
-      left: 2rem;
-      background: rgba(255, 255, 255, 0.9);
+      top: 1rem;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(255, 255, 255, 0.8);
       backdrop-filter: blur(10px);
-      padding: 1rem;
+      padding: 0.8rem;
       border-radius: 10px;
       color: #2c3e50;
       font-size: 0.9rem;
-      max-width: 200px;
+      text-align: center;
+      z-index: 10;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     }
     
     .model-controls {
       position: absolute;
-      bottom: 2rem;
-      right: 2rem;
+      bottom: 1rem;
+      left: 50%;
+      transform: translateX(-50%);
       display: flex;
       gap: 0.5rem;
+      z-index: 10;
     }
     
     .control-btn {
@@ -263,21 +268,7 @@
         font-size: 1.8rem;
       }
       
-      .model-info {
-        position: relative;
-        top: auto;
-        left: auto;
-        margin-bottom: 1rem;
-        max-width: none;
-      }
-      
-      .model-controls {
-        position: relative;
-        bottom: auto;
-        right: auto;
-        justify-content: center;
-        margin-top: 1rem;
-      }
+      /* 保持model-info和model-controls的绝对定位，不需要修改 */
     }
     
     @media (max-width: 480px) {
