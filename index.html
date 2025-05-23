@@ -269,6 +269,34 @@
       }
       
       /* 保持model-info和model-controls的绝对定位，不需要修改 */
+      
+      /* 调整联系信息和二维码在移动设备上的布局 */
+      .contact {
+        flex-direction: column;
+      }
+      
+      .contact-info {
+        width: 100%;
+        margin-bottom: 1.5rem;
+      }
+      
+      .contact-qr {
+        margin-left: 0;
+        margin-top: 1rem;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 1.5rem 0;
+        background-color: rgba(255, 255, 255, 0.7);
+        border-radius: 10px;
+      }
+      
+      .qr-code {
+        width: 180px;
+        height: auto;
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+      }
     }
     
     @media (max-width: 480px) {
