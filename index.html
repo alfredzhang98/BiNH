@@ -3,6 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-DLTLB29612"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-DLTLB29612');
+  </script>
+  <!-- End Google Analytics -->
+  
   <title>Haptic-Enhanced Bioimpedance Needle for Precision Navigation in Central Venous Catheterisation with Millimetre Accuracy</title>
   <!-- 引入 model-viewer 组件 -->
   <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.0.0/model-viewer.min.js"></script>
@@ -333,6 +344,12 @@
 
         <div class="description">
           Central venous catheterisation (CVC) is a critical but challenging procedure, often complicated by needle misplacement. This project presents a bioimpedance (BIOZ) system with haptic feedback to assist clinicians in precise needle navigation.
+          <div style="height: 1rem;"></div>
+          <a href="2740.pdf" download="Haptic-Enhanced-BIOZ-Paper.pdf" 
+            style="display: inline-block; padding: 0.5rem 1rem; background: #667eea; color: #fff; 
+                    border-radius: 5px; text-decoration: none; font-weight: 600;">
+            Download Paper
+          </a>
         </div>
 
         <div class="features">
@@ -458,6 +475,10 @@
     resetBtn.addEventListener('click', () => {
       model.cameraOrbit = '-60deg 75deg 20deg';
       model.cameraTarget = '-0.18m 0.05m 0m';
+      gtag('event', 'reset_view', {
+        'event_category': '3d_model',
+        'event_label': 'Reset View Button'
+      });
     });
 
     // 模型加载完成后的初始设置
@@ -465,6 +486,10 @@
       // 设置初始相机位置，确保模型居中显示
       model.cameraOrbit = '-60deg 75deg 20deg';
       model.cameraTarget = '-0.18m 0.05m 0m';
+      gtag('event', 'model_loaded', {
+        'event_category': '3d_model',
+        'event_label': 'BIOZ Needle'
+      });
     });
   </script>
 </body>
